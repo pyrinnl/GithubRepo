@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.pyrinnl.githubrepo.model.entities.Repo
 
+
 class RepositoryInfoViewModel: ViewModel() {
     val state: LiveData<State> = TODO()
 

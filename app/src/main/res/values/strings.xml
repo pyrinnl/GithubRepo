@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GithubRepo</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="personal_access_token_hint">Personal access token</string>
+    <string name="field_is_empty">Field is empty</string>
+    <string name="invalid_token">Invalid token</string>
+    <string name="invalid_input">Invalid input</string>
+    <string name="repositories_toolbar_title">Repositories</string>
 </resources>

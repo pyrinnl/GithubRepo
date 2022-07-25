@@ -1,5 +1,8 @@
 package com.pyrinnl.githubrepo.model.entities
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserInfo(
-    val info: String
+    val ownerName: String
 )
