@@ -1,8 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailInfoFragment">
 
-</FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailInfoLayoutIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <TextView
+                android:id="@+id/linkTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:autoLink="web"
+                android:drawablePadding="3dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_link"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="github.com/pyrinnl/pomodoro" />
+
+
+            <TextView
+                android:id="@+id/licenseTitleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/license_tv"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_license"
+                app:layout_constraintStart_toStartOf="@+id/linkTV"
+                app:layout_constraintTop_toBottomOf="@+id/linkTV" />
+
+            <TextView
+                android:id="@+id/licenseTypeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/licenseTitleTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/licenseTitleTV"
+                tools:text="Apache-2.0" />
+
+
+            <TextView
+                android:id="@+id/starsCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:textColor="@color/yellow"
+                app:drawableStartCompat="@drawable/ic_star"
+                app:layout_constraintStart_toStartOf="@+id/licenseTitleTV"
+                app:layout_constraintTop_toBottomOf="@+id/licenseTitleTV"
+                tools:text="259" />
+
+            <TextView
+                android:id="@+id/starTitleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/stars_tv"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/starsCountTV"
+                app:layout_constraintStart_toEndOf="@+id/starsCountTV"
+                app:layout_constraintTop_toTopOf="@+id/starsCountTV" />
+
+            <TextView
+                android:id="@+id/forksCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/green_second"
+                app:drawableStartCompat="@drawable/ic_forks"
+                app:layout_constraintBottom_toBottomOf="@+id/starsCountTV"
+                app:layout_constraintEnd_toStartOf="@+id/forksTV"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/starTitleTV"
+                app:layout_constraintTop_toTopOf="@+id/starsCountTV"
+                tools:text="30" />
+
+            <TextView
+                android:id="@+id/forksTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/forks_tv"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/forksCountTV"
+                app:layout_constraintEnd_toStartOf="@+id/watchersCountTV"
+                app:layout_constraintStart_toEndOf="@+id/forksCountTV"
+                app:layout_constraintTop_toTopOf="@+id/forksCountTV" />
+
+            <TextView
+                android:id="@+id/watchersCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/blue_second"
+                app:drawableStartCompat="@drawable/ic_watchers"
+                app:layout_constraintBottom_toBottomOf="@+id/forksCountTV"
+                app:layout_constraintEnd_toStartOf="@+id/watchersTV"
+                app:layout_constraintTop_toTopOf="@+id/forksCountTV"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/watchersTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/watchers_tv"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/watchersCountTV"
+                app:layout_constraintEnd_toEndOf="@+id/licenseTypeTV"
+                app:layout_constraintTop_toTopOf="@+id/watchersCountTV" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="147dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline">
+
+                <ProgressBar
+                    android:id="@+id/readmeProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/readmeTV"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    tools:text="README.MD" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:id="@+id/startProgressBar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

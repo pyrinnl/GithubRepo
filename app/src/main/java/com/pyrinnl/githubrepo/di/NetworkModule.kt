@@ -1,5 +1,6 @@
 package com.pyrinnl.githubrepo.di
 
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.pyrinnl.githubrepo.Const
 import com.pyrinnl.githubrepo.data.retrofit.RepoApi
@@ -41,7 +42,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         val contentType = "application/vnd.github+json".toMediaType()
-        val json = Json {ignoreUnknownKeys = true}
+        val json = Json{ignoreUnknownKeys = true}
         return Retrofit.Builder()
             .baseUrl(Const.BASE_URL)
             .addConverterFactory(json.asConverterFactory(contentType))
@@ -52,9 +53,11 @@ class NetworkModule {
     private fun createAuthorizationInterceptor(settings: AppSettings): Interceptor {
         return Interceptor { chain ->
             val newBuilder = chain.request().newBuilder()
-            val token = /*settings.geCurrentToken()*/ null
+                .also { it.header("Accept", "application/vnd.github.v3+json") }
+            val token = settings.geCurrentToken()
             if (token != null) {
-                newBuilder.addHeader("Authorization", "token $token")
+                newBuilder
+                    .header("Authorization", Const.START_POINT + "$token")
             }
             return@Interceptor chain.proceed(newBuilder.build())
         }

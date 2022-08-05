@@ -2,12 +2,12 @@ package com.pyrinnl.githubrepo.data.retrofit
 
 import com.pyrinnl.githubrepo.Const
 import com.pyrinnl.githubrepo.data.retrofit.base.BaseRetrofitSource
-import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoDetailsResponseEntity
 import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoReadmeResponseEntity
-import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoResponseEntity
-import com.pyrinnl.githubrepo.data.retrofit.entities.SignInResponseEntity
 import com.pyrinnl.githubrepo.model.RepoSource
-import kotlinx.coroutines.delay
+import com.pyrinnl.githubrepo.model.entities.Readme
+import com.pyrinnl.githubrepo.model.entities.Repo
+import com.pyrinnl.githubrepo.model.entities.RepoDetails
+import com.pyrinnl.githubrepo.model.entities.UserInfo
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,23 +17,30 @@ class RetrofitRepoSource @Inject constructor(
 ) : BaseRetrofitSource(), RepoSource {
 
 
-    override suspend fun signIn(token: String): SignInResponseEntity = wrapRetrofitExceptions {
-        delay(2000)
-        repoApi.signIn("${Const.START_POINT} $token")
+    override suspend fun signIn(token: String): UserInfo = wrapRetrofitExceptions {
+        repoApi.signIn("${Const.START_POINT} $token").mapToUserInfo()
     }
 
-    override suspend fun getRepositories(): List<GetRepoResponseEntity> {
-        TODO("Not yet implemented")
+    override suspend fun getUserInfo(): UserInfo = wrapRetrofitExceptions {
+        repoApi.getUserInfo().mapToUserInfo()
     }
 
-    override suspend fun getRepository(repoId: String): GetRepoDetailsResponseEntity {
-        TODO("Not yet implemented")
+    override suspend fun getRepositories(): List<Repo> = wrapRetrofitExceptions {
+        repoApi.getRepositories().map {
+            it.mapToRepo()
+        }
     }
+
+
+    override suspend fun getRepository(ownerName: String, repoName: String): RepoDetails =
+        wrapRetrofitExceptions {
+            repoApi.getRepository(ownerName, repoName).mapToRepoDetails()
+        }
 
     override suspend fun getRepositoryReadme(
         ownerName: String,
-        repositoryName: String
-    ): GetRepoReadmeResponseEntity {
-        TODO("Not yet implemented")
+        repoName: String
+    ): Readme = wrapRetrofitExceptions {
+        repoApi.getRepositoryReadme(ownerName, repoName).mapToReadme()
     }
 }

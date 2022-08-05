@@ -9,13 +9,16 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.json.JSONException
 import retrofit2.HttpException
+import retrofit2.Retrofit
 import java.io.IOException
+import java.net.UnknownHostException
 import java.nio.charset.StandardCharsets
 
 open class BaseRetrofitSource {
 
 
-    suspend fun <T> wrapRetrofitExceptions(block: suspend () -> T): T {
+    suspend fun <T>
+            wrapRetrofitExceptions(block: suspend () -> T): T {
         return try {
             block()
         } catch (e: AppException) {

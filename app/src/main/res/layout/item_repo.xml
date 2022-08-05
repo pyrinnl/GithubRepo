@@ -1,63 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:background="?selectableItemBackground">
 
 
     <TextView
         android:id="@+id/repoNameTV"
         android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="260dp"
-        android:gravity="center_vertical"
-        android:lineSpacingExtra="9sp"
+        android:layout_marginTop="16dp"
         android:textAppearance="@style/RepoNameItemTextStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="moko-resources" />
 
     <TextView
-        android:id="@+id/languageTV"
+        android:id="@+id/repoLanguageTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="21dp"
         android:layout_marginEnd="16dp"
-        android:gravity="end|center_vertical"
         android:textColor="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@+id/repoNameTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/repoNameTV"
         tools:text="Kotlin" />
 
     <TextView
-        android:id="@+id/descriptionTV"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginRight="16dp"
-        android:gravity="top"
+        android:id="@+id/repoDescriptionTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:lineSpacingExtra="4sp"
         android:textAppearance="@style/RepoDescriptionItemTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repoNameTV"
         tools:text="Resources access for mobile (android &amp; ios) Kotlin Multiplatform development" />
 
-    <View
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="repoDescriptionTV"/>
+
+    <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="300dp"
-        android:layout_alignBottom="@id/descriptionTV"
-        android:background="@color/gray" />
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/barrier"/>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

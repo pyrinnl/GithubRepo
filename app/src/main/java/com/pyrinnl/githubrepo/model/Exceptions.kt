@@ -11,9 +11,10 @@ class EmptyFieldException(
     val field: Field
 ) : AppException()
 
+
 class InvalidInputException : AppException()
 
-class AutException(
+class AuthException(
     cause: Throwable
 ) : AppException(cause = cause)
 
@@ -22,6 +23,7 @@ class InvalidCredentialsException(
 ) : AppException(cause = cause)
 
 class ConnectionException(cause: Throwable) : AppException(cause = cause)
+
 
 class BackendException(
     val code: Int,
@@ -32,14 +34,17 @@ class ParseBackendResponseException(
     cause: Throwable
 ) : AppException(cause = cause)
 
-internal fun <T> wrapBackendException(block: () -> T): T {
+
+internal inline fun <T> wrapBackendExceptions(block: () -> T): T {
     try {
-        return block()
+        return block.invoke()
     } catch (e: BackendException) {
         if (e.code == 401) {
-            throw AutException(e)
-        } else
+            throw AuthException(e)
+        } else {
             throw e
+        }
     }
 }
+
 

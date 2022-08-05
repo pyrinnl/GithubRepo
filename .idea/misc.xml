@@ -6,18 +6,38 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.2785" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_connection_error.xml" value="0.267" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_empty.xml" value="0.1995" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_forks.xml" value="0.267" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.267" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_link.xml" value="0.267" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_logo.xml" value="0.267" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_logout.xml" value="0.267" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_rounded_corner.xml" value="0.234" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_something_error.xml" value="0.2715" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_splash_icon.xml" value="0.344" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_star.xml" value="0.267" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/ic_watchers.xml" value="0.267" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/rounded_corner.xml" value="0.267" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/drawable/test.xml" value="0.2015" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout-sw600dp/fragment_auth.xml" value="0.27890625" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/activity_main.xml" value="0.371875" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/connection_error_item.xml" value="0.33" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/empty_repos_item.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/error_item.xml" value="0.33" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_auth.xml" value="0.33" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_detail_info.xml" value="0.371875" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_repositories_list.xml" value="0.5" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/item_repo.xml" value="0.5" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/test.xml" value="0.371875" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_detail_info.xml" value="0.33" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_error_dialog.xml" value="0.3578125" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_login.xml" value="0.3578125" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_repositories_list.xml" value="0.33" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/fragment_splash.xml" value="0.371875" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/item_connection_error.xml" value="0.3052586575459598" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/item_empty_repos.xml" value="0.3052586575459598" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/item_repo.xml" value="0.33" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/something_error_item.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/test.xml" value="0.5" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/toolbar.xml" value="0.22" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/layout/toolbar_layout.xml" value="0.371875" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/menu/menu.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/GithubRepo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.267" />
       </map>
     </option>
   </component>

@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pyrinnl.githubrepo.R
-import com.pyrinnl.githubrepo.model.AppRepository
-import com.pyrinnl.githubrepo.model.EmptyFieldException
-import com.pyrinnl.githubrepo.model.InvalidCredentialsException
-import com.pyrinnl.githubrepo.model.InvalidInputException
+import com.pyrinnl.githubrepo.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -44,6 +41,9 @@ class AuthViewModel @Inject constructor(
                 _state.value = State.InvalidInput(R.string.invalid_input)
             } catch (e: InvalidCredentialsException) {
                 _state.value = State.InvalidInput(R.string.invalid_token)
+            } catch (e: ConnectionException) {
+                _state.value = State.Idle
+                _actions.send(Action.ShowError(R.string.connection_error))
             }
         }
     }

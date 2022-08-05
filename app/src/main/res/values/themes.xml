@@ -15,5 +15,9 @@
 
         <item name="materialButtonStyle">@style/GlobalButtonStyle</item>
         <item name="toolbarStyle">@style/GlobalToolBarStyle</item>
+        <item name="android:progressBarStyle">@style/CircularProgress</item>
+        <item name="android:textViewStyle">@style/TextViewDrawableStyle</item>
     </style>
+    
+
 </resources>
