@@ -10,7 +10,6 @@ import kotlinx.serialization.json.Json
 import org.json.JSONException
 import retrofit2.HttpException
 import java.io.IOException
-import java.nio.charset.StandardCharsets
 
 open class BaseRetrofitSource {
 

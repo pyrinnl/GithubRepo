@@ -2,6 +2,7 @@ package com.pyrinnl.githubrepo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.pyrinnl.githubrepo.R

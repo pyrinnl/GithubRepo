@@ -13,7 +13,7 @@ class EmptyFieldException(
 
 class InvalidInputException : AppException()
 
-class AutException(
+class AuthException(
     cause: Throwable
 ) : AppException(cause = cause)
 
@@ -28,18 +28,23 @@ class BackendException(
     message: String
 ) : AppException(message)
 
+class EmptyContentException() : AppException()
+
 class ParseBackendResponseException(
     cause: Throwable
 ) : AppException(cause = cause)
 
-internal fun <T> wrapBackendException(block: () -> T): T {
+
+internal inline fun <T> wrapBackendExceptions(block: () -> T): T {
     try {
-        return block()
+        return block.invoke()
     } catch (e: BackendException) {
         if (e.code == 401) {
-            throw AutException(e)
-        } else
+            throw AuthException(e)
+        } else {
             throw e
+        }
     }
 }
+
 

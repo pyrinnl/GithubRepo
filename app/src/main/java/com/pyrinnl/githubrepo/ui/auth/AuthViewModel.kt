@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pyrinnl.githubrepo.R
-import com.pyrinnl.githubrepo.model.AppRepository
-import com.pyrinnl.githubrepo.model.EmptyFieldException
-import com.pyrinnl.githubrepo.model.InvalidCredentialsException
-import com.pyrinnl.githubrepo.model.InvalidInputException
+import com.pyrinnl.githubrepo.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val appRepository: AppRepository
+    private val appRepository: AppRepository,
 ) : ViewModel() {
 
     val token: MutableLiveData<String> = MutableLiveData("")
@@ -32,11 +31,14 @@ class AuthViewModel @Inject constructor(
 
 
     fun onSignButtonPressed() {
+        viewModelScope.safeSignIn { appRepository.signIn(token.value?: "") }
+    }
 
-        viewModelScope.launch {
+    private fun CoroutineScope.safeSignIn(block: suspend CoroutineScope.() -> Unit) {
+        this.launch {
             try {
                 _state.value = State.Loading
-                appRepository.signIn(token.value ?: "")
+                block.invoke(this)
                 _actions.send(Action.RouteToMain)
             } catch (e: EmptyFieldException) {
                 _state.value = State.InvalidInput(R.string.field_is_empty)
@@ -44,6 +46,9 @@ class AuthViewModel @Inject constructor(
                 _state.value = State.InvalidInput(R.string.invalid_input)
             } catch (e: InvalidCredentialsException) {
                 _state.value = State.InvalidInput(R.string.invalid_token)
+            } catch (e: ConnectionException) {
+                _state.value = State.Idle
+                _actions.send(Action.ShowError(R.string.connection_error))
             }
         }
     }
