@@ -1,16 +1,15 @@
 package com.pyrinnl.githubrepo.model
 
 import com.pyrinnl.githubrepo.data.retrofit.RetrofitRepoSource
-import com.pyrinnl.githubrepo.model.entities.Readme
 import com.pyrinnl.githubrepo.model.entities.Repo
 import com.pyrinnl.githubrepo.model.entities.RepoDetails
 import com.pyrinnl.githubrepo.model.entities.UserInfo
 import com.pyrinnl.githubrepo.model.settings.AppSettings
 import com.pyrinnl.githubrepo.utills.isASCII
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,17 +19,17 @@ class AppRepository @Inject constructor(
     private val retrofitRepoSource: RetrofitRepoSource
 ) {
 
-    val user: UserInfo? = null
+    private lateinit var currentUserInfo: UserInfo
 
     fun isSignIn(): Boolean {
         return appSettings.geCurrentToken() != null
     }
 
-    suspend fun signIn(token: String): UserInfo {
-        if (token.isBlank()) throw EmptyFieldException(Field.Token)
+    suspend fun signIn(token: String) {
+        if (token.isBlank()) throw EmptyFieldException()
         if (!token.isASCII()) throw InvalidInputException()
 
-        val userInfo = try {
+        currentUserInfo = try {
             retrofitRepoSource.signIn(token)
         } catch (e: Exception) {
             if (e is BackendException && e.code == 401)
@@ -38,28 +37,32 @@ class AppRepository @Inject constructor(
             else
                 throw e
         }
-
         appSettings.setCurrentToken(token)
-        return userInfo
     }
 
     suspend fun getRepositories(): List<Repo> {
-        return retrofitRepoSource.getRepositories()
+        val repos = retrofitRepoSource.getRepositories()
+        if (repos.isEmpty()) throw EmptyContentException()
+        return repos
     }
 
     suspend fun getRepository(repoName: String): RepoDetails {
-        val userInfo = doGetUserInfo()
-        return retrofitRepoSource.getRepository(userInfo.ownerName, repoName)
+        return retrofitRepoSource.getRepository(currentUserInfo.ownerName, repoName)
     }
 
-    suspend fun getRepositoryReadme( repositoryName: String): Readme {
-        val userInfo = doGetUserInfo()
-       return retrofitRepoSource.getRepositoryReadme(userInfo.ownerName, repositoryName)
+    suspend fun getRepositoryReadme(repositoryName: String) = wrapBackendExceptions {
+        try {
+            retrofitRepoSource.getRepositoryReadme(currentUserInfo.ownerName, repositoryName)
+                .mapToReadme()
+        } catch (e: BackendException) {
+            if (e.code == 404) throw EmptyContentException()
+            else throw e
+        }
     }
 
-    private suspend fun doGetUserInfo() = wrapBackendExceptions {
-            try {
-            retrofitRepoSource.getUserInfo()
+    suspend fun doGetUserInfo() = wrapBackendExceptions {
+        try {
+            currentUserInfo = retrofitRepoSource.getUserInfo()
         } catch (e: BackendException) {
             if (e.code == 404) throw AuthException(e)
             else throw e
@@ -70,4 +73,3 @@ class AppRepository @Inject constructor(
         appSettings.setCurrentToken(null)
     }
 }
-

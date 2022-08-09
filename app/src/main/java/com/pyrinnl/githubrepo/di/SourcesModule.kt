@@ -1,7 +1,7 @@
 package com.pyrinnl.githubrepo.di
 
 import com.pyrinnl.githubrepo.data.retrofit.RetrofitRepoSource
-import com.pyrinnl.githubrepo.model.RepoSource
+import com.pyrinnl.githubrepo.data.retrofit.RepoSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

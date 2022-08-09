@@ -41,7 +41,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
-        val contentType = "application/vnd.github+json".toMediaType()
+        val contentType = Const.ACCEPT.toMediaType()
         val json = Json{ignoreUnknownKeys = true}
         return Retrofit.Builder()
             .baseUrl(Const.BASE_URL)
@@ -53,7 +53,7 @@ class NetworkModule {
     private fun createAuthorizationInterceptor(settings: AppSettings): Interceptor {
         return Interceptor { chain ->
             val newBuilder = chain.request().newBuilder()
-                .also { it.header("Accept", "application/vnd.github.v3+json") }
+                .also { it.header(Const.ACCEPT_HEADER, Const.ACCEPT) }
             val token = settings.geCurrentToken()
             if (token != null) {
                 newBuilder

@@ -7,9 +7,7 @@ open class AppException : RuntimeException {
     constructor(cause: Throwable) : super(cause)
 }
 
-class EmptyFieldException(
-    val field: Field
-) : AppException()
+class EmptyFieldException : AppException()
 
 
 class InvalidInputException : AppException()
@@ -29,6 +27,8 @@ class BackendException(
     val code: Int,
     message: String
 ) : AppException(message)
+
+class EmptyContentException() : AppException()
 
 class ParseBackendResponseException(
     cause: Throwable

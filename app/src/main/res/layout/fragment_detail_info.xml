@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,23 +21,28 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/detailInfoLayoutIn"
+            android:id="@+id/detailInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/linkTV"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
                 android:autoLink="web"
                 android:drawablePadding="3dp"
                 android:ellipsize="end"
-                android:gravity="center"
+                android:gravity="start"
+                android:singleLine="true"
                 android:textSize="16sp"
                 app:drawableStartCompat="@drawable/ic_link"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="github.com/pyrinnl/pomodoro" />
@@ -140,22 +144,25 @@
                 app:layout_constraintEnd_toEndOf="@+id/licenseTypeTV"
                 app:layout_constraintTop_toTopOf="@+id/watchersCountTV" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="147dp" />
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="forksCountTV, starsCountTV, watchersCountTV" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
+                android:paddingBottom="?attr/actionBarSize"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline">
+                app:layout_constraintTop_toBottomOf="@id/barrier">
 
                 <ProgressBar
                     android:id="@+id/readmeProgressBar"
@@ -166,10 +173,10 @@
 
                 <TextView
                     android:id="@+id/readmeTV"
-                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:layout_margin="12dp"
+                    android:padding="6dp"
                     tools:text="README.MD" />
 
             </LinearLayout>
@@ -178,6 +185,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include
+        android:id="@+id/errorItem"
+        layout="@layout/item_error"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/toolbar"

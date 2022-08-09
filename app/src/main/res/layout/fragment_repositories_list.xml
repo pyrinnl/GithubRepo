@@ -35,19 +35,10 @@
         layout="@layout/toolbar" />
 
     <include
-        android:id="@+id/connectionErrorItem"
-        layout="@layout/item_connection_error"
+        android:id="@+id/errorItem"
+        layout="@layout/item_error"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/emptyReposItem"
-        layout="@layout/item_empty_repos"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/somethingErrorItem"
-        layout="@layout/item_something_error"
-        android:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

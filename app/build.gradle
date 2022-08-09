@@ -68,7 +68,5 @@ dependencies {
 
     implementation "io.noties.markwon:core:4.2.0"
 
-    // ProgressButton
-    implementation "com.github.razir.progressbutton:progressbutton:2.1.0"
-
+    implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
 }

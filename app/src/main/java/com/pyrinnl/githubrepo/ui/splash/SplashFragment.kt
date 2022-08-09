@@ -29,15 +29,24 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     }
 
     private fun launchMainScreen(isSignIn: Boolean) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            delay(300)
+        lifecycleScope.launch(Dispatchers.Main) {
 
-            withContext(Dispatchers.Main) {
-                if (isSignIn)
-                    findNavController().navigate(R.id.action_splashFragment_to_repositoriesListFragment)
-                else
-                    findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+            if (isSignIn) {
+                viewModel.getUserInfo()
+                routeToRepositoriesListFragment()
+            } else {
+                delay(300)
+                routeToAuthFragment()
+
             }
         }
+    }
+
+    private fun routeToAuthFragment() {
+        findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+    }
+
+    private fun routeToRepositoriesListFragment() {
+        findNavController().navigate(R.id.action_splashFragment_to_repositoriesListFragment)
     }
 }

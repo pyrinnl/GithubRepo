@@ -109,8 +109,7 @@ data class GetRepoResponseEntity(
             forks = forks_count,
             watchers = watchers_count,
             url = html_url,
-            license = license?.name
+            license = license?.spdx_id
         )
     }
 }
-

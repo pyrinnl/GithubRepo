@@ -3,8 +3,6 @@ package com.pyrinnl.githubrepo.data.retrofit
 import com.pyrinnl.githubrepo.Const
 import com.pyrinnl.githubrepo.data.retrofit.base.BaseRetrofitSource
 import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoReadmeResponseEntity
-import com.pyrinnl.githubrepo.model.RepoSource
-import com.pyrinnl.githubrepo.model.entities.Readme
 import com.pyrinnl.githubrepo.model.entities.Repo
 import com.pyrinnl.githubrepo.model.entities.RepoDetails
 import com.pyrinnl.githubrepo.model.entities.UserInfo
@@ -31,7 +29,6 @@ class RetrofitRepoSource @Inject constructor(
         }
     }
 
-
     override suspend fun getRepository(ownerName: String, repoName: String): RepoDetails =
         wrapRetrofitExceptions {
             repoApi.getRepository(ownerName, repoName).mapToRepoDetails()
@@ -40,7 +37,7 @@ class RetrofitRepoSource @Inject constructor(
     override suspend fun getRepositoryReadme(
         ownerName: String,
         repoName: String
-    ): Readme = wrapRetrofitExceptions {
-        repoApi.getRepositoryReadme(ownerName, repoName).mapToReadme()
+    ): GetRepoReadmeResponseEntity = wrapRetrofitExceptions {
+        repoApi.getRepositoryReadme(ownerName, repoName)
     }
 }

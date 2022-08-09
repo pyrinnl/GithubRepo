@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GithubRepo</string>
+    <string name="sign_in_button">Войти</string>
+    <string name="personal_access_token_hint">Персональный ключ доступа</string>
+    <string name="field_is_empty">Пустое поле</string>
+    <string name="invalid_token">Недопустимый токен</string>
+    <string name="invalid_input">Неверный ввод</string>
+    <string name="repositories_toolbar_title">Репозитории</string>
+    <string name="license_tv">Лицензия</string>
+    <string name="connection_error">Не удается подключиться к серверу.\проверьте свое подключение к интернету</string>
+    <string name="alert_dialog_title">Ошибка</string>
+    <string name="connection_error_item_title">Ошибка соединения</string>
+    <string name="connection_error_item_desc">Проверьте ваше интернет соединение</string>
+    <string name="retry_button">Повторить попытку</string>
+    <string name="refresh_button">Обновить</string>
+    <string name="empty_item_title">Пусто</string>
+    <string name="empty_desc_item">В данный момент репозитории отсутствуют</string>
+    <string name="something_error_Item_title">Что-то пошло не так</string>
+    <string name="something_error_item_desc">Повторите попытку позже</string>
+    <string name="no_readme">README.md файл отсутствует</string>
+    <string name="license_is_empty">Отсутствует</string>
+</resources>

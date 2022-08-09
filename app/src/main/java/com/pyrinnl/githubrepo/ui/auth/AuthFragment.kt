@@ -1,7 +1,7 @@
 package com.pyrinnl.githubrepo.ui.auth
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
@@ -11,10 +11,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.github.razir.progressbutton.ProgressParams
-import com.github.razir.progressbutton.bindProgressButton
-import com.github.razir.progressbutton.hideProgress
-import com.github.razir.progressbutton.showProgress
+import com.github.razir.progressbutton.*
 import com.pyrinnl.githubrepo.R
 import com.pyrinnl.githubrepo.databinding.FragmentAuthBinding
 import com.pyrinnl.githubrepo.ui.auth.AuthViewModel.State.Loading
@@ -32,6 +29,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAuthBinding.bind(view)
+        this.bindProgressButton(binding.signInButton)
 
         binding.tokenEditText.bindTextTwoWay(viewModel.token, viewLifecycleOwner)
 
@@ -45,10 +43,17 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         binding.tokenTextInput.error =
             if (state is AuthViewModel.State.InvalidInput) getString(state.reason) else null
 
-        binding.progressBar.visibility = if (state is Loading) View.VISIBLE else View.INVISIBLE
-
         binding.tokenTextInput.isEnabled = state !is Loading
 
+        binding.signInButton.apply {
+            if (state is Loading) {
+                showProgress{
+                    progressColor = Color.WHITE
+                }
+            } else {
+                hideProgress(R.string.sign_in_button)
+            }
+        }
     }
 
     private fun observeActions() = lifecycleScope.launch {
@@ -67,7 +72,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         ErrorDialogFragment.show(this.requireActivity().supportFragmentManager, errorMessage)
     }
 
-
     private fun EditText.bindTextTwoWay(
         liveData: MutableLiveData<String>,
         lifecycleOwner: LifecycleOwner
@@ -82,6 +86,5 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             this.setText(text)
         }
     }
-
 }
 
