@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.pyrinnl.githubrepo.R
 import com.pyrinnl.githubrepo.databinding.FragmentDetailInfoBinding
+import com.pyrinnl.githubrepo.ui.detail.RepositoryInfoViewModel.*
 import com.pyrinnl.githubrepo.utills.setTextColor
 import com.pyrinnl.githubrepo.utills.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint

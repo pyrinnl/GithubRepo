@@ -8,7 +8,7 @@
     <string name="invalid_input">Неверный ввод</string>
     <string name="repositories_toolbar_title">Репозитории</string>
     <string name="license_tv">Лицензия</string>
-    <string name="connection_error">Не удается подключиться к серверу.\проверьте свое подключение к интернету</string>
+    <string name="connection_error">Не удается подключиться к серверу.\nПроверьте свое подключение к интернету</string>
     <string name="alert_dialog_title">Ошибка</string>
     <string name="connection_error_item_title">Ошибка соединения</string>
     <string name="connection_error_item_desc">Проверьте ваше интернет соединение</string>

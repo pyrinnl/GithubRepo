@@ -3,6 +3,7 @@ package com.pyrinnl.githubrepo.data.retrofit
 import com.pyrinnl.githubrepo.Const
 import com.pyrinnl.githubrepo.data.retrofit.base.BaseRetrofitSource
 import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoReadmeResponseEntity
+import com.pyrinnl.githubrepo.model.RepoSource
 import com.pyrinnl.githubrepo.model.entities.Repo
 import com.pyrinnl.githubrepo.model.entities.RepoDetails
 import com.pyrinnl.githubrepo.model.entities.UserInfo

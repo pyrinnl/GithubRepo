@@ -1,22 +1,17 @@
 package com.pyrinnl.githubrepo.model
 
-import com.pyrinnl.githubrepo.data.retrofit.RetrofitRepoSource
 import com.pyrinnl.githubrepo.model.entities.Repo
 import com.pyrinnl.githubrepo.model.entities.RepoDetails
 import com.pyrinnl.githubrepo.model.entities.UserInfo
 import com.pyrinnl.githubrepo.model.settings.AppSettings
 import com.pyrinnl.githubrepo.utills.isASCII
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AppRepository @Inject constructor(
     private val appSettings: AppSettings,
-    private val retrofitRepoSource: RetrofitRepoSource
+    private val retrofitRepoSource: RepoSource
 ) {
 
     private lateinit var currentUserInfo: UserInfo
@@ -59,6 +54,7 @@ class AppRepository @Inject constructor(
             else throw e
         }
     }
+
 
     suspend fun doGetUserInfo() = wrapBackendExceptions {
         try {

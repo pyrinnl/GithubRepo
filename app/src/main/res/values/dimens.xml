@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_margin">15dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="fragment_horizontal_margin">16dp</dimen>
-    <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="divider_thickness">2dp</dimen>
+    <dimen name="huge_space">80dp</dimen>
+    <dimen name="very_large_space">24dp</dimen>
+    <dimen name="large_space">16dp</dimen>
+    <dimen name="medium_space">12dp</dimen>
+    <dimen name="small_space">6dp</dimen>
+    <dimen name="very_small_space">2dp</dimen>
+    <dimen name="small_line_spacing">4sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="medium_text_size">16sp</dimen>
+    <dimen name="bellow_medium_text_size">14sp</dimen>
+
 </resources>

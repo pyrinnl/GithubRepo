@@ -1,4 +1,4 @@
-package com.pyrinnl.githubrepo.data.retrofit
+package com.pyrinnl.githubrepo.model
 
 import com.pyrinnl.githubrepo.data.retrofit.entities.GetRepoReadmeResponseEntity
 import com.pyrinnl.githubrepo.model.entities.Repo

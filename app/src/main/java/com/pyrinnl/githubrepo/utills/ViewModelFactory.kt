@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 typealias ViewModelCreator<VM> = () -> VM
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory<VM : ViewModel>(
+internal class ViewModelFactory<VM : ViewModel>(
     private val viewModelCreator: ViewModelCreator<VM>
 ) : ViewModelProvider.Factory {
 
@@ -16,6 +16,6 @@ class ViewModelFactory<VM : ViewModel>(
         return viewModelCreator() as T
     }
 }
-inline fun <reified VM : ViewModel> Fragment.viewModelCreator(noinline creator: ViewModelCreator<VM>): Lazy<VM> {
+internal inline fun <reified VM : ViewModel> Fragment.viewModelCreator(noinline creator: ViewModelCreator<VM>): Lazy<VM> {
     return viewModels { ViewModelFactory(creator) }
 }

@@ -1,6 +1,5 @@
 package com.pyrinnl.githubrepo.ui.detail
 
-import android.util.Log
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -16,11 +15,9 @@ import com.pyrinnl.githubrepo.utills.toMarkdown
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 class RepositoryInfoViewModel @AssistedInject constructor(
@@ -35,11 +32,11 @@ class RepositoryInfoViewModel @AssistedInject constructor(
 
 
     init {
-        initRepoDetails(repoName)
+        loadRepoDetails(repoName = repoName, isReload = false)
     }
 
     fun onRetryRepoDetailsButtonPressed(repoName: String) {
-        viewModelScope.safeGetRepoDetails { appRepository.getRepository(repoName) }
+        loadRepoDetails(repoName = repoName, isReload = true)
     }
 
     fun onRetryReadmeButtonPressed(repoName: String) {
@@ -50,6 +47,18 @@ class RepositoryInfoViewModel @AssistedInject constructor(
 
     fun logout() {
         appRepository.logout()
+    }
+
+    private fun loadRepoDetails(repoName: String, isReload: Boolean) {
+        viewModelScope.safeGetRepoDetails {
+            if(isReload) delay(300)
+            appRepository.getRepository(repoName).also { repoDetails ->
+                repositoryDetails = repoDetails
+                repoDetails.safeGetReadme {
+                    appRepository.getRepositoryReadme(repoName)
+                }
+            }
+        }
     }
 
     private fun CoroutineScope.safeGetRepoDetails(block: suspend CoroutineScope.() -> RepoDetails) {
@@ -63,7 +72,6 @@ class RepositoryInfoViewModel @AssistedInject constructor(
                 errorTexts = processConnectionException()
                 _state.value = State.Error(errorTexts)
             } catch (e: Exception) {
-                Log.d("ERRORTAG", "cause:${e.cause}| message: ${e.message}")
                 errorTexts = processInternalException()
                 _state.value = State.Error(errorTexts)
             }
@@ -92,62 +100,50 @@ class RepositoryInfoViewModel @AssistedInject constructor(
         }
 
     }
-
-    private fun initRepoDetails(repoName: String) {
-        viewModelScope.safeGetRepoDetails {
-            appRepository.getRepository(repoName).also { repoDetails ->
-                repositoryDetails = repoDetails
-                repoDetails.safeGetReadme {
-                    appRepository.getRepositoryReadme(repoName)
-                }
-            }
-        }
+    private fun processConnectionException(): ErrorTexts {
+        return ErrorTexts(
+            title = R.string.connection_error_item_title,
+            text = R.string.connection_error_item_desc,
+            errorIcon = R.drawable.ic_connection_error
+        )
     }
-}
 
-private fun processConnectionException(): ErrorTexts {
-    return ErrorTexts(
-        title = R.string.connection_error_item_title,
-        text = R.string.connection_error_item_desc,
-        errorIcon = R.drawable.ic_connection_error
+    private fun processInternalException(): ErrorTexts {
+        return ErrorTexts(
+            title = R.string.something_error_Item_title,
+            text = R.string.something_error_item_desc,
+            errorIcon = R.drawable.ic_something_error,
+        )
+    }
+
+
+    sealed interface State {
+        object Loading : State
+        data class Error(val error: ErrorTexts) : State
+        data class Loaded(
+            val repoDetails: RepoDetails,
+            val readmeState: ReadmeState
+        ) : State
+    }
+
+    sealed interface ReadmeState {
+        object Loading : ReadmeState
+        object Empty : ReadmeState
+        data class Error(val errorTexts: ErrorTexts) : ReadmeState
+        data class Loaded(val markdown: String) : ReadmeState
+    }
+
+
+    class ErrorTexts(
+        @StringRes val title: Int,
+        @ColorRes val colorTitle: Int = R.color.error,
+        @StringRes val text: Int,
+        @DrawableRes val errorIcon: Int,
+        @StringRes val buttonText: Int = R.string.retry_button
     )
-}
 
-private fun processInternalException(): ErrorTexts {
-    return ErrorTexts(
-        title = R.string.something_error_Item_title,
-        text = R.string.something_error_item_desc,
-        errorIcon = R.drawable.ic_something_error,
-    )
-}
-
-
-sealed interface State {
-    object Loading : State
-    data class Error(val error: ErrorTexts) : State
-    data class Loaded(
-        val repoDetails: RepoDetails,
-        val readmeState: ReadmeState
-    ) : State
-}
-
-sealed interface ReadmeState {
-    object Loading : ReadmeState
-    object Empty : ReadmeState
-    data class Error(val errorTexts: ErrorTexts) : ReadmeState
-    data class Loaded(val markdown: String) : ReadmeState
-}
-
-
-class ErrorTexts(
-    @StringRes val title: Int,
-    @ColorRes val colorTitle: Int = R.color.error,
-    @StringRes val text: Int,
-    @DrawableRes val errorIcon: Int,
-    @StringRes val buttonText: Int = R.string.retry_button
-)
-
-@AssistedFactory
-interface Factory {
-    fun create(repoName: String): RepositoryInfoViewModel
+    @AssistedFactory
+    interface Factory {
+        fun create(repoName: String): RepositoryInfoViewModel
+    }
 }

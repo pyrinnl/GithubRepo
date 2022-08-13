@@ -3,12 +3,10 @@ package com.pyrinnl.githubrepo.ui.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.pyrinnl.githubrepo.model.AppRepository
 import com.pyrinnl.githubrepo.model.ConnectionException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

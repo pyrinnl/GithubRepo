@@ -1,6 +1,5 @@
 package com.pyrinnl.githubrepo.di
 
-import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.pyrinnl.githubrepo.Const
 import com.pyrinnl.githubrepo.data.retrofit.RepoApi
@@ -9,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -38,6 +38,7 @@ class NetworkModule {
             .build()
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {

@@ -11,8 +11,8 @@
         android:id="@+id/repoNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/large_space"
+        android:layout_marginTop="@dimen/large_space"
         android:textAppearance="@style/RepoNameItemTextStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/repoLanguageTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/large_space"
         tools:textColor="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="@+id/repoNameTV"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,10 +33,10 @@
         android:id="@+id/repoDescriptionTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:lineSpacingExtra="4sp"
+        android:layout_marginStart="@dimen/large_space"
+        android:layout_marginTop="@dimen/medium_space"
+        android:layout_marginEnd="@dimen/large_space"
+        android:lineSpacingExtra="@dimen/small_line_spacing"
         android:textAppearance="@style/RepoDescriptionItemTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +46,14 @@
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
         android:layout_width="0dp"
-        android:layout_height="12dp"
+        android:layout_height="0dp"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="repoDescriptionTV"/>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/divider_thickness"
+        android:layout_marginTop="@dimen/small_space"
         app:layout_constraintTop_toBottomOf="@id/barrier"/>
 
 

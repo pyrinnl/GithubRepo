@@ -1,7 +1,6 @@
 package com.pyrinnl.githubrepo.utills
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Base64
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -11,7 +10,7 @@ import java.nio.charset.CharacterCodingException
 import java.nio.charset.StandardCharsets
 
 
-fun String.isASCII(): Boolean {
+internal fun String.isASCII(): Boolean {
 
     val byteArray = this.toByteArray()
     val decoder = StandardCharsets.US_ASCII.newDecoder()
@@ -25,12 +24,12 @@ fun String.isASCII(): Boolean {
     return isASCII
 }
 
-fun String.toMarkdown(): String {
+internal fun String.toMarkdown(): String {
     val data = Base64.decode(this, Base64.DEFAULT)
     return String(data, StandardCharsets.UTF_8)
 }
 
-fun TextView.setTextColor(context: Context, @ColorRes color: Int) {
+internal fun TextView.setTextColor(context: Context, @ColorRes color: Int) {
     setTextColor(
         ContextCompat.getColor(
             context,

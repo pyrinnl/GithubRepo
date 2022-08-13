@@ -14,6 +14,7 @@ import com.pyrinnl.githubrepo.model.EmptyContentException
 import com.pyrinnl.githubrepo.model.entities.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,9 +33,7 @@ class RepositoriesListViewModel @Inject constructor(
     }
 
     fun onRetryButtonPressed() {
-        viewModelScope.safeLaunch {
-            appRepository.getRepositories()
-        }
+        reloadData()
     }
 
     fun logout() {
@@ -55,6 +54,14 @@ class RepositoriesListViewModel @Inject constructor(
             } catch (e: Exception) {
                 processInternalException()
             }
+        }
+    }
+
+    private fun reloadData() {
+        viewModelScope.safeLaunch {
+            delay(300)
+            appRepository.doGetUserInfo()
+            appRepository.getRepositories()
         }
     }
 

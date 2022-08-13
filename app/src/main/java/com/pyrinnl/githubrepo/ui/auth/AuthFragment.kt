@@ -62,7 +62,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     private fun handleActions(action: AuthViewModel.Action) {
         when (action) {
-            AuthViewModel.Action.RouteToMain -> findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
+            AuthViewModel.Action.RouteToMain -> routeToRepositoriesListFragment()
             is AuthViewModel.Action.ShowError -> showErrorDialogFragment(action.message)
         }
     }
@@ -85,6 +85,9 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
             this.setText(text)
         }
+    }
+    private fun routeToRepositoriesListFragment() {
+        findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
     }
 }
 
